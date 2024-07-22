@@ -2,8 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const {validateToken} = require("../middlewares/auth");
-const { index } = require ("../controllers/sub_bab.controllers");
+const { validateToken } = require("../middlewares/auth");
+const{ index } = require("../controllers/bab.controller");
 
 router.get("/", validateToken, index);
 

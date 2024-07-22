@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { index } = require("../controllers/kelas.controllers");
+const { index } = require("../controllers/kelas.controller");
 
 router.get("/",index);
 

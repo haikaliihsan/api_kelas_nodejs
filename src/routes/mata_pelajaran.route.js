@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const { validateToken} = require("../middlewares/auth");
-const { index } = require("../controllers/mata_pelajaran.controllers");
+const { index } = require("../controllers/mata_pembelajaran.controller");
 
 router.get ("/", validateToken, index);
 
