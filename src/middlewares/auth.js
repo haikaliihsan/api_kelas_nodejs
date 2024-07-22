@@ -1,20 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-/** 
-*@param {import("express").Request } req
-*@param {import("express").Response } res
-*@param {import("express").NextFunction } next
-*/
-const verifyToken = async ( req, res, next) => {
-    try {
-        const authHeader = req.headers["authorization"] || "";
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
+const verifyToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers["authorization"] || "";
 
-        if (authHeader.split (" ").length !== 2) {
-            return res.status(401).send({
-                message: "Invalid token",
-                data: null,
-            });
-        };
+    if (authHeader.split(" ").length !== 2) {
+      return res.status(401).send({
+        message: "Invalid token",
+        data: null,
+      });
     }
 
     const token = authHeader.split(" ")[1];
@@ -26,20 +25,20 @@ const verifyToken = async ( req, res, next) => {
       });
     }
 
-    //saveuser to request objek
+    // Save decoded user to request object
     req.user = user;
 
     next();
-} catch (err) {
-    if(err.name === "JsonWebTokenError") {
-        return res.status(401).send({
-            message:"Invalid Token",
-            data: null,
-        });
+  } catch (err) {
+    if (err.name === "JsonWebTokenError") {
+      return res.status(401).send({
+        message: "Invalid token",
+        data: null,
+      });
     }
 
     next(err);
-    }
+  }
 };
 
 module.exports = { verifyToken };
